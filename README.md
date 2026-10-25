@@ -50,11 +50,7 @@ Desenvolvido segundo a metodologia **Antigravity** (código modular, hiper-funci
 1. Crie um repositório no seu GitHub (ex: `agendou-app` ou `agendamentos`).
 2. No seu terminal, dentro desta pasta:
    ```bash
-   git init
-   git add .
-   git commit -m "feat: MVP do gerenciador de agendamentos micro-saas"
-   git branch -M main
-   git remote add origin https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git
+   git remote set-url origin https://github.com/bioadsl/NexusStudio.git
    git push -u origin main
    ```
 3. Acesse o repositório no GitHub:
@@ -62,7 +58,7 @@ Desenvolvido segundo a metodologia **Antigravity** (código modular, hiper-funci
    - Em **Branch**, selecione `main` e a pasta `/ (root)`.
    - Clique em **Save**.
 4. Em cerca de 1 minuto, seu sistema estará disponível publicamente no link:
-   `https://SEU_USUARIO.github.io/SEU_REPOSITORIO/`
+   `https://bioadsl.github.io/NexusStudio/`
 
 ---
 
