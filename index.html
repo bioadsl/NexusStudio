@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth bg-slate-950 text-slate-100">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Software Studio | Soluções Digitais & Sistemas Sob Medida</title>
+    
+    <!-- Meta SEO & Social -->
+    <meta name="description" content="Desenvolvimento de software de alta performance, Micro-SaaS e Agendamentos Automatizados sob medida para alavancar pequenas e médias empresas.">
+    <meta name="keywords" content="micro-saas, sistema de agendamento, automacao comercial, desenvolvimento web sob medida, landing page alta conversao">
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            blue: '#3b82f6',
+                            indigo: '#6366f1',
+                            purple: '#8b5cf6',
+                            emerald: '#10b981',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Custom Glowing & Glass Effects */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(51, 65, 85, 0.6);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(99, 102, 241, 0.6);
+        }
+
+        .glow-accent {
+            box-shadow: 0 0 50px -10px rgba(99, 102, 241, 0.35);
+        }
+
+        .glow-featured {
+            box-shadow: 0 0 60px -15px rgba(139, 92, 246, 0.4);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #a855f7 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.8), rgba(168, 85, 247, 0.8));
+            padding: 1px;
+            border-radius: 1.5rem;
+        }
+
+        .gradient-border-content {
+            background: #0f172a;
+            border-radius: calc(1.5rem - 1px);
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased selection:bg-indigo-500 selection:text-white min-h-screen flex flex-col">
+
+    <!-- ====================================================================== -->
+    <!-- BARRA DE NAVEGAÇÃO                                                     -->
+    <!-- ====================================================================== -->
+    <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+            
+            <!-- Logo Studio -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition-transform">
+                    <i data-lucide="sparkles" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-extrabold text-lg tracking-tight text-white">Nexus<span class="text-indigo-400">Studio</span></span>
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">SOFTWARE & IA</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 hidden sm:block">Sistemas Micro-SaaS & Automação Comercial</p>
+                </div>
+            </a>
+
+            <!-- Links de Navegação -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
+                <a href="#degustacao" class="hover:text-indigo-400 transition-colors flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>Degustação ao Vivo</span>
+                </a>
+                <a href="#vantagens" class="hover:text-indigo-400 transition-colors">Diferenciais</a>
+                <a href="#precos" class="hover:text-indigo-400 transition-colors">Planos & Preços</a>
+                <a href="#faq" class="hover:text-indigo-400 transition-colors">Dúvidas</a>
+            </nav>
+
+            <!-- Ações Diretas -->
+            <div class="flex items-center gap-3">
+                <a href="degustacao.html" target="_blank"
+                    class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-slate-200 bg-slate-900 border border-slate-700 hover:border-indigo-500 hover:bg-slate-800 transition-all">
+                    <i data-lucide="play" class="w-3.5 h-3.5 text-indigo-400 fill-indigo-400"></i>
+                    <span>Testar App ao Vivo</span>
+                </a>
+
+                <a href="https://wa.me/5561984260515?text=Ol%C3%A1!%20Vi%20a%20landing%20page%20do%20Nexus%20Studio%20e%20gostaria%20de%20um%20or%C3%A7amento%20para%20minha%20empresa."
+                    target="_blank"
+                    class="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 shadow-lg shadow-emerald-600/25 transition-all">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+                    <span>Falar no WhatsApp</span>
+                </a>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="flex-1">
+
+        <!-- ====================================================================== -->
+        <!-- HERO SECTION: IMPACTO & CONVERSÃO                                      -->
+        <!-- ====================================================================== -->
+        <section class="relative pt-16 pb-24 overflow-hidden">
+            <!-- Background Glows -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-indigo-600/20 blur-[130px] rounded-full pointer-events-none"></div>
+            <div class="absolute top-1/3 left-1/4 w-[300px] h-[300px] bg-purple-600/15 blur-[120px] rounded-full pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                
+                <!-- Badge de Topo -->
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-indigo-500/30 text-indigo-300 text-xs font-bold mb-8 shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>TECNOLOGIA DE ALTO IMPACTO PARA NEGÓCIOS LOCAIS & DIGITAIS</span>
+                </div>
+
+                <!-- Título Principal -->
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white max-w-4xl mx-auto leading-tight sm:leading-none">
+                    Sistemas Modernos, Agendamentos e Automações <span class="gradient-text">Sob Medida</span> para o seu Negócio
+                </h1>
+
+                <!-- Subtítulo -->
+                <p class="mt-6 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                    Chega de perder vendas por demora no WhatsApp ou planilhas confusas. Criamos ferramentas web sob o princípio <strong class="text-white">Antigravity</strong>: ultrarrápidas, funcionais, 100% integradas e sem mensalidades abusivas de plataformas terceiras.
+                </p>
+
+                <!-- Botões de Ação do Hero -->
+                <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="degustacao.html" target="_blank"
+                        class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-black text-sm shadow-xl shadow-indigo-600/30 flex items-center justify-center gap-3 transition-all hover:scale-[1.02]">
+                        <i data-lucide="play-circle" class="w-5 h-5"></i>
+                        <span>Degustação Interativa ao Vivo</span>
+                    </a>
+
+                    <a href="#precos"
+                        class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold text-sm flex items-center justify-center gap-2 transition-all">
+                        <span>Ver Níveis & Preços</span>
+                        <i data-lucide="arrow-down" class="w-4 h-4 text-indigo-400"></i>
+                    </a>
+                </div>
+
+                <!-- Métricas de Confiança / Prova Social -->
+                <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto pt-10 border-t border-slate-800/80">
+                    <div class="p-3">
+                        <p class="text-2xl sm:text-3xl font-black text-white">0.3s</p>
+                        <p class="text-xs text-slate-400 mt-1">Carregamento instantâneo</p>
+                    </div>
+                    <div class="p-3">
+                        <p class="text-2xl sm:text-3xl font-black text-emerald-400">+98%</p>
+                        <p class="text-xs text-slate-400 mt-1">Taxa de confirmação</p>
+                    </div>
+                    <div class="p-3">
+                        <p class="text-2xl sm:text-3xl font-black text-indigo-400">0%</p>
+                        <p class="text-xs text-slate-400 mt-1">Taxa por agendamento</p>
+                    </div>
+                    <div class="p-3">
+                        <p class="text-2xl sm:text-3xl font-black text-purple-400">100%</p>
+                        <p class="text-xs text-slate-400 mt-1">Código de sua propriedade</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ====================================================================== -->
+        <!-- DEGUSTAÇÃO DO CLIENTE: O PRODUTO FUNCIONAL EM AÇÃO (INDEX.HTML)         -->
+        <!-- ====================================================================== -->
+        <section id="degustacao" class="py-20 bg-slate-900/40 border-y border-slate-800/80 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-3">
+                        <i data-lucide="sparkle" class="w-3.5 h-3.5"></i> Degustação Gratuita em Tempo Real
+                    </span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                        Experimente o Produto que seus Clientes vão Adorar
+                    </h2>
+                    <p class="text-slate-400 text-sm sm:text-base mt-3">
+                        Não vendemos slides ou maquetes estáticas. Desenvolvemos o <strong class="text-indigo-300">Gerenciador de Agendamentos Automatizado</strong> funcional, com duplo painel (Cliente & Dono do Negócio) e disparador de WhatsApp.
+                    </p>
+                </div>
+
+                <!-- Showcase Card em Destaque Interativo -->
+                <div class="gradient-border glow-accent max-w-5xl mx-auto">
+                    <div class="gradient-border-content p-6 sm:p-10">
+                        
+                        <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                            
+                            <div class="space-y-5 flex-1">
+                                <div class="flex items-center gap-3">
+                                    <span class="px-3 py-1 rounded-lg bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 text-xs font-bold">
+                                        LIVE DEMO
+                                    </span>
+                                    <span class="text-xs text-slate-400 flex items-center gap-1">
+                                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i> Persistência no Navegador
+                                    </span>
+                                </div>
+
+                                <h3 class="text-xl sm:text-2xl font-bold text-white">
+                                    Gerenciador de Agendamentos Inteligente
+                                </h3>
+
+                                <p class="text-slate-300 text-sm leading-relaxed">
+                                    Teste agora a experiência do cliente (escolha de serviço, calendário sem conflitos e envio direto para WhatsApp) e alterne para o <strong>Painel do Administrador</strong> com métricas de faturamento, confirmação e remarcação de horários.
+                                </p>
+
+                                <!-- Nichos Demonstrativos Prontos -->
+                                <div class="pt-2">
+                                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+                                        Nichos prontos inclusos na demonstração:
+                                    </p>
+                                    <div class="flex flex-wrap gap-2 text-xs">
+                                        <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-200 border border-slate-700">✂️ Barbearia</span>
+                                        <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-200 border border-slate-700">💇‍♀️ Salão de Beleza</span>
+                                        <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-200 border border-slate-700">✨ Estética</span>
+                                        <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-200 border border-slate-700">🦷 Odontologia</span>
+                                        <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-200 border border-slate-700">🏃 Fisioterapia</span>
+                                    </div>
+                                </div>
+
+                                <!-- Botão de Abertura da Degustação -->
+                                <div class="pt-4 flex flex-col sm:flex-row items-center gap-4">
+                                    <a href="degustacao.html" target="_blank"
+                                        class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/30 transition-all">
+                                        <span>Abrir Demonstração do Agendador</span>
+                                        <i data-lucide="external-link" class="w-4 h-4"></i>
+                                    </a>
+                                    
+                                    <span class="text-xs text-slate-400 flex items-center gap-1.5">
+                                        <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i> Sem necessidade de login
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Mockup / Preview Ilustrativo -->
+                            <div class="w-full lg:w-96 bg-slate-950/90 rounded-2xl p-5 border border-slate-800 shadow-2xl relative overflow-hidden group">
+                                <div class="flex items-center justify-between pb-3 border-b border-slate-800 text-xs">
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+                                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                                    </div>
+                                    <span class="font-mono text-[10px] text-slate-500">degustacao.html</span>
+                                </div>
+
+                                <div class="py-4 space-y-3">
+                                    <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-xs flex items-center justify-between">
+                                        <div>
+                                            <p class="font-bold text-white">Corte & Barba VIP</p>
+                                            <p class="text-[10px] text-slate-400">60 min • R$ 80,00</p>
+                                        </div>
+                                        <span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-400 font-bold">Livre</span>
+                                    </div>
+
+                                    <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-xs flex items-center justify-between">
+                                        <div>
+                                            <p class="font-bold text-white">Confirmação WhatsApp</p>
+                                            <p class="text-[10px] text-slate-400">Geração de link wa.me direto</p>
+                                        </div>
+                                        <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i>
+                                    </div>
+
+                                    <div class="p-3 rounded-xl bg-indigo-950/40 border border-indigo-900/60 text-xs">
+                                        <div class="flex items-center justify-between font-bold text-indigo-300">
+                                            <span>Painel Admin</span>
+                                            <span>R$ 1.840,00 Previsto</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a href="degustacao.html" target="_blank"
+                                    class="block w-full text-center py-2.5 bg-slate-900 hover:bg-slate-800 text-indigo-400 border border-slate-700 rounded-xl text-xs font-bold transition-all">
+                                    Clique para Interagir ↗
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ====================================================================== -->
+        <!-- DIFERENCIAIS: O PRINCÍPIO ANTIGRAVITY                                  -->
+        <!-- ====================================================================== -->
+        <section id="vantagens" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                        Por que nossos Sistemas geram mais Lucro que Plataformas Comuns?
+                    </h2>
+                    <p class="text-slate-400 text-sm mt-3">
+                        Eliminamos a complexidade desnecessária e entregamos ferramentas rápidas, sob medida e que você realmente domina.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <div class="glass-card p-8 rounded-3xl space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center">
+                            <i data-lucide="zap" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Hiper-Velocidade & Conversão</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Zero lentidão de plataformas infladas como WordPress ou plugins pesados. A página carrega no celular do seu cliente em menos de 0.5s, reduzindo a taxa de abandono a quase zero.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-3xl space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                            <i data-lucide="coins" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Sem Taxas por Transação</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Diferente de marketplaces que cobram comissão ou mensalidades que aumentam conforme você cresce, o sistema é seu. Hospedagem econômica ou gratuita no GitHub Pages / CDN própria.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-3xl space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-purple-500/20 text-purple-400 flex items-center justify-center">
+                            <i data-lucide="bot" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Arquitetura Escalável & IA</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Comece com um agendador ou catálogo e evolua suavemente para controle de estoque, dashboards financeiros ou agentes de inteligência artificial sem precisar recomeçar do zero.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ====================================================================== -->
+        <!-- TABELA DE PREÇOS E NÍVEIS (EVOLUÇÃO DA INDEX_3PUBLICOS.HTML)           -->
+        <!-- ====================================================================== -->
+        <section id="precos" class="py-20 bg-slate-900/30 border-t border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 text-xs font-bold uppercase tracking-wider mb-3">
+                        Modelos de Projeto & Investimento
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                        Escolha o Nível Ideal para o Momento da sua Empresa
+                    </h2>
+                    <p class="text-slate-400 text-sm sm:text-base mt-3">
+                        Desenvolvimento ágil com código limpo, suporte prioritário e garantia de entrega funcional.
+                    </p>
+                </div>
+
+                <!-- Grade com os 3 Níveis -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+
+                    <!-- NÍVEL 1: INICIANTE / ESSENCIAL -->
+                    <div class="glass-card rounded-3xl p-8 flex flex-col justify-between relative border border-slate-800">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-bold uppercase tracking-wider">
+                                    Nível 1 • Essencial
+                                </span>
+                            </div>
+
+                            <h3 class="text-2xl font-black text-white">Presença & Agendamento</h3>
+                            <p class="text-xs text-slate-400 mt-2 mb-6">
+                                Ideal para profissionais autônomos, barbearias, clínicas e prestadores que precisam organizar a agenda e parar de perder clientes.
+                            </p>
+
+                            <ul class="space-y-4 mb-8 text-sm">
+                                <li class="flex items-start gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                                        <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                                    </div>
+                                    <div>
+                                        <span class="font-bold text-white">Gerenciador de Agendamento Inteligente</span>
+                                        <p class="text-xs text-slate-400 mt-0.5">Calendário dinâmico, bloqueio de conflitos de horário e seleção de serviços.</p>
+                                    </div>
+                                </li>
+
+                                <li class="flex items-start gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                                        <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                                    </div>
+                                    <div>
+                                        <span class="font-bold text-white">Automação WhatsApp & Google Agenda</span>
+                                        <p class="text-xs text-slate-400 mt-0.5">Comprovante digital com link pré-formatado para confirmação no WhatsApp.</p>
+                                    </div>
+                                </li>
+
+                                <li class="flex items-start gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                                        <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                                    </div>
+                                    <div>
+                                        <span class="font-bold text-white">Landing Page & Catálogo Digital</span>
+                                        <p class="text-xs text-slate-400 mt-0.5">Página de alta conversão estruturada com design responsivo premium.</p>
+                                    </div>
+                                </li>
+
+                                <li class="flex items-start gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                                        <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                                    </div>
+                                    <div>
+                                        <span class="font-bold text-white">Painel Administrativo Básico</span>
+                                        <p class="text-xs text-slate-400 mt-0.5">Confirmar, remarcar, cancelar horários e métricas do dia.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="pt-6 border-t border-slate-800 space-y-4">
+                            <div>
+                                <span class="text-xs text-slate-400 block">Investimento Estimado</span>
+                                <div class="text-2xl sm:text-3xl font-black text-white">R$ 800 - R$ 2.000</div>
+                                <span class="text-xs text-slate-500">Ou modelo SaaS / mensalidade sob consulta</span>
+                            </div>
+
+                            <a href="https://wa.me/5561984260515?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20o%20N%C3%ADvel%201%20(Presen%C3%A7a%20%26%20Agendamento)%20para%20meu%20neg%C3%B3cio."
+                                target="_blank"
+                                class="block w-full py-3.5 px-4 rounded-xl text-center bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs sm:text-sm border border-slate-700 hover:border-indigo-500 transition-all">
+                                Solicitar Projeto Nível 1
+                            </a>
+
+                            <a href="degustacao.html" target="_blank"
+                                class="flex items-center justify-center gap-1.5 text-xs text-indigo-400 hover:text-indigo-300 font-bold transition-colors">
+                                <i data-lucide="play" class="w-3 h-3"></i>
+                                <span>Degustação deste Nível (Testar)</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- NÍVEL 2: INTERMEDIÁRIO / MAIS VENDIDO (DESTAQUE) -->
+                    <div class="gradient-border glow-featured flex flex-col justify-between relative transform lg:-translate-y-2">
+                        <div class="gradient-border-content p-8 flex flex-col justify-between h-full">
+                            <div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="px-3 py-1 rounded-full bg-gradient-to-r from-purple-500/20 to-indigo-500/20 text-purple-300 border border-purple-500/30 text-xs font-bold uppercase tracking-wider">
+                                        Nível 2 • Intermediário
+                                    </span>
+                                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold bg-indigo-500 text-white shadow-sm">
+                                        MAIS VENDIDO
+                                    </span>
+                                </div>
+
+                                <h3 class="text-2xl font-black text-white">Automação & Controle</h3>
+                                <p class="text-xs text-slate-400 mt-2 mb-6">
+                                    Para empresas em expansão que necessitam de controle integrado de estoque, vendas em balcão e fluxo financeiro em tempo real.
+                                </p>
+
+                                <ul class="space-y-4 mb-8 text-sm">
+                                    <li class="flex items-start gap-3">
+                                        <div class="w-5 h-5 rounded-full bg-indigo-500/30 text-indigo-300 flex items-center justify-center shrink-0 mt-0.5">
+                                            <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                                        </div>
+                                        <div>
+                                            <span class="font-bold text-white">Tudo incluso no Nível 1</span>
+                                            <p class="text-xs text-slate-400 mt-0.5">Agendamento, catálogo digital e automação WhatsApp completa.</p>
+                                        </div>
+                                    </li>
+
+                                    <li class="flex items-start gap-3">
+                                        <div class="w-5 h-5 rounded-full bg-indigo-500/30 text-indigo-300 flex items-center justify-center shrink-0 mt-0.5">
+                                            <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                                        </div>
+                                        <div>
+                                            <span class="font-bold text-white">Gestão de Estoque & PDV Integrado</span>
+                                            <p class="text-xs text-slate-400 mt-0.5">Controle de produtos, alertas de reposição, registro de entradas e saídas.</p>
+                                        </div>
+                                    </li>
+
+                                    <li class="flex items-start gap-3">
+                                        <div class="w-5 h-5 rounded-full bg-indigo-500/30 text-indigo-300 flex items-center justify-center shrink-0 mt-0.5">
+                                            <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                                        </div>
+                                        <div>
+                                            <span class="font-bold text-white">Controle Financeiro & Relatórios</span>
+                                            <p class="text-xs text-slate-400 mt-0.5">Fluxo de caixa diário, mensal e faturamento real vs. previsto.</p>
+                                        </div>
+                                    </li>
+
+                                    <li class="flex items-start gap-3">
+                                        <div class="w-5 h-5 rounded-full bg-indigo-500/30 text-indigo-300 flex items-center justify-center shrink-0 mt-0.5">
+                                            <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                                        </div>
+                                        <div>
+                                            <span class="font-bold text-white">Multi-Usuários & Permissões</span>
+                                            <p class="text-xs text-slate-400 mt-0.5">Acesso diferenciado para atendentes, profissionais e administradores.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="pt-6 border-t border-slate-800 space-y-4">
+                                <div>
+                                    <span class="text-xs text-slate-400 block">Investimento Estimado</span>
+                                    <div class="text-2xl sm:text-3xl font-black text-indigo-300">R$ 2.500 - R$ 5.000</div>
+                                    <span class="text-xs text-slate-500">Modelos de licenciamento comercial flexíveis</span>
+                                </div>
+
+                                <a href="https://wa.me/5561984260515?text=Ol%C3%A1!%20Quero%20uma%20demonstra%C3%A7%C3%A3o%20do%20N%C3%ADvel%202%20(Automa%C3%A7%C3%A3o%20%26%20Controle)%20para%20minha%20empresa."
+                                    target="_blank"
+                                    class="block w-full py-4 px-4 rounded-xl text-center bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-black text-sm shadow-lg shadow-indigo-600/30 transition-all">
+                                    Solicitar Demonstração do Nível 2
+                                </a>
+
+                                <span class="block text-center text-[11px] text-emerald-400 font-semibold">
+                                    ⚡ Recomendado para clínicas e lojas com equipe
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NÍVEL 3: AVANÇADO / INTELIGÊNCIA AGÊNTICA -->
+                    <div class="glass-card rounded-3xl p-8 flex flex-col justify-between relative border border-slate-800">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-bold uppercase tracking-wider">
+                                    Nível 3 • Corporativo
+                                </span>
+                            </div>
+
+                            <h3 class="text-2xl font-black text-white">Inteligência Agêntica & IA</h3>
+                            <p class="text-xs text-slate-400 mt-2 mb-6">
+                                Automações inteligentes de ponta com agentes de IA autônomos integrados ao CRM, canais de atendimento e tomada de decisões.
+                            </p>
+
+                            <ul class="space-y-4 mb-8 text-sm">
+                                <li class="flex items-start gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0 mt-0.5">
+                                        <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                                    </div>
+                                    <div>
+                                        <span class="font-bold text-white">Integração WhatsApp API Oficial & CRM</span>
+                                        <p class="text-xs text-slate-400 mt-0.5">Disparo automático de lembretes, reengajamento de clientes e confirmações.</p>
+                                    </div>
+                                </li>
+
+                                <li class="flex items-start gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0 mt-0.5">
+                                        <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                                    </div>
+                                    <div>
+                                        <span class="font-bold text-white">Agentes Especializados de IA</span>
+                                        <p class="text-xs text-slate-400 mt-0.5">Chatbot inteligente capaz de tirar dúvidas, sugerir horários e agendar sozinho.</p>
+                                    </div>
+                                </li>
+
+                                <li class="flex items-start gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0 mt-0.5">
+                                        <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                                    </div>
+                                    <div>
+                                        <span class="font-bold text-white">Microsserviços & APIs Sob Medida</span>
+                                        <p class="text-xs text-slate-400 mt-0.5">Conexão direta com sistemas legados, gateways de pagamento e ERPs.</p>
+                                    </div>
+                                </li>
+
+                                <li class="flex items-start gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0 mt-0.5">
+                                        <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                                    </div>
+                                    <div>
+                                        <span class="font-bold text-white">Consultoria & Arquitetura Dedicada</span>
+                                        <p class="text-xs text-slate-400 mt-0.5">Acompanhamento contínuo de métricas, segurança e infraestrutura.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="pt-6 border-t border-slate-800 space-y-4">
+                            <div>
+                                <span class="text-xs text-slate-400 block">Investimento Estimado</span>
+                                <div class="text-2xl sm:text-3xl font-black text-white">A partir de R$ 6.000</div>
+                                <span class="text-xs text-slate-500">Escopo sob medida e SLA contratual</span>
+                            </div>
+
+                            <a href="https://wa.me/5561984260515?text=Ol%C3%A1!%20Gostaria%20de%20conversar%20sobre%20o%20N%C3%ADvel%203%20(Intelig%C3%AAncia%20Ag%C3%AAntica%20%26%20IA)%20para%20minha%20opera%C3%A7%C3%A3o."
+                                target="_blank"
+                                class="block w-full py-3.5 px-4 rounded-xl text-center bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs sm:text-sm border border-slate-700 hover:border-purple-500 transition-all">
+                                Falar com Arquiteto de Software
+                            </a>
+
+                            <span class="block text-center text-xs text-slate-500">
+                                Diagnóstico de viabilidade técnica incluso
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ====================================================================== -->
+        <!-- FAQ: PERGUNTAS FREQUENTES                                              -->
+        <!-- ====================================================================== -->
+        <section id="faq" class="py-20">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Perguntas Frequentes</h2>
+                    <p class="text-slate-400 text-sm mt-2">Tire suas dúvidas sobre desenvolvimento, prazos e hospedagem.</p>
+                </div>
+
+                <div class="space-y-4">
+                    
+                    <div class="glass-card rounded-2xl p-6 border border-slate-800">
+                        <h4 class="font-bold text-white text-base flex items-center justify-between">
+                            <span>Como funciona a degustação do sistema de agendamento?</span>
+                            <i data-lucide="help-circle" class="w-4 h-4 text-indigo-400"></i>
+                        </h4>
+                        <p class="text-sm text-slate-400 mt-2 leading-relaxed">
+                            A degustação disponível no link <a href="degustacao.html" target="_blank" class="text-indigo-400 underline font-semibold">degustacao.html</a> é um sistema real e funcional. Ele simula o banco de dados no seu próprio navegador através do LocalStorage, permitindo que você agende horários, teste a prevenção de conflitos e veja o envio do WhatsApp sem custos.
+                        </p>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 border border-slate-800">
+                        <h4 class="font-bold text-white text-base flex items-center justify-between">
+                            <span>Onde o sistema é hospedado e quanto custa a manutenção?</span>
+                            <i data-lucide="help-circle" class="w-4 h-4 text-indigo-400"></i>
+                        </h4>
+                        <p class="text-sm text-slate-400 mt-2 leading-relaxed">
+                            O sistema é construído segundo o princípio Antigravity com arquitetura estática leve. Ele pode ser hospedado gratuitamente no GitHub Pages, Vercel, Netlify ou no seu próprio servidor com custo de infraestrutura quase nulo.
+                        </p>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 border border-slate-800">
+                        <h4 class="font-bold text-white text-base flex items-center justify-between">
+                            <span>Consigo personalizar as cores, logotipo e serviços para a minha marca?</span>
+                            <i data-lucide="help-circle" class="w-4 h-4 text-indigo-400"></i>
+                        </h4>
+                        <p class="text-sm text-slate-400 mt-2 leading-relaxed">
+                            Sim, 100%! O sistema conta inclusive com uma tela de configurações administrativas para mudar nomes, horários de atendimento, número de WhatsApp e serviços cadastrados diretamente na interface.
+                        </p>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 border border-slate-800">
+                        <h4 class="font-bold text-white text-base flex items-center justify-between">
+                            <span>Qual é o prazo médio de entrega de um projeto?</span>
+                            <i data-lucide="help-circle" class="w-4 h-4 text-indigo-400"></i>
+                        </h4>
+                        <p class="text-sm text-slate-400 mt-2 leading-relaxed">
+                            Projetos de Nível 1 são entregues e configurados em até 3 a 5 dias úteis. Projetos de Nível 2 e Nível 3 variam entre 10 a 25 dias dependendo das integrações de APIs e regras de negócio específicas.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ====================================================================== -->
+        <!-- CTA FINAL                                                              -->
+        <!-- ====================================================================== -->
+        <section class="py-20 relative overflow-hidden bg-gradient-to-b from-slate-950 to-indigo-950/60 border-t border-slate-800/80">
+            <div class="max-w-5xl mx-auto px-4 text-center space-y-6">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase">
+                    Pronto para Começar?
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">
+                    Transforme seu Atendimento e Escale seu Faturamento Hoje
+                </h2>
+                <p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto">
+                    Entre em contato diretamente pelo WhatsApp para alinharmos o melhor formato de projeto para a sua operação.
+                </p>
+                <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="https://wa.me/5561984260515?text=Ol%C3%A1!%20Gostaria%20de%20um%20diagn%C3%B3stico%20e%20or%C3%A7amento%20para%20desenvolver%20um%20sistema%20para%20minha%20empresa."
+                        target="_blank"
+                        class="px-8 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-sm flex items-center gap-2 shadow-xl shadow-emerald-600/30 transition-all hover:scale-105">
+                        <i data-lucide="message-circle" class="w-5 h-5"></i>
+                        <span>Solicitar Orçamento no WhatsApp</span>
+                    </a>
+
+                    <a href="degustacao.html" target="_blank"
+                        class="px-8 py-4 rounded-2xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold text-sm flex items-center gap-2 transition-all">
+                        <i data-lucide="play" class="w-4 h-4 text-indigo-400"></i>
+                        <span>Ver Degustação ao Vivo</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 border-t border-slate-800/80 py-10 text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <span class="font-extrabold text-sm text-slate-300">Nexus<span class="text-indigo-400">Studio</span></span>
+                <span>• Soluções Digitais & Inteligência Agêntica</span>
+            </div>
+            <p>© 2026 Nexus Software Studio. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Inicializar ícones Lucide
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide && typeof window.lucide.createIcons === 'function') {
+                window.lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+
+</html>

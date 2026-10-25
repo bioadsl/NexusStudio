@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full bg-slate-50">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendou.io | Sistema de Agendamento Inteligente</title>
+    
+    <!-- Meta SEO & Social -->
+    <meta name="description" content="Plataforma Micro-SaaS moderna de agendamentos automatizados com confirmação via WhatsApp para Barbearias, Clínicas de Estética, Consultórios e Fisioterapia.">
+    <meta name="keywords" content="agendamento online, barbearia, clinica estetica, fisioterapia, dentista, whatsapp automation">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Estilos Personalizados & Micro-interações -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="min-h-full flex flex-col text-slate-800 antialiased selection:bg-indigo-500 selection:text-white">
+
+    <!-- BARRA DE NAVEGAÇÃO SUPERIOR -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-slate-200/80 shadow-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between gap-4">
+            
+            <!-- Logo & Nicho Atual -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20">
+                    <i data-lucide="calendar-check-2" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-extrabold text-lg text-slate-900 tracking-tight dynamic-business-name">Agendou.io</span>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-indigo-100 text-indigo-700">PRO</span>
+                    </div>
+                    <p class="text-xs text-slate-500 hidden sm:block" id="businessSubtitle">Agendamento rápido & confirmação no WhatsApp</p>
+                </div>
+            </div>
+
+            <!-- Seletor Rápido de Nicho (Ideal para Demonstrações Comerciais) -->
+            <div class="hidden md:flex items-center gap-2 bg-slate-100/90 p-1 rounded-xl border border-slate-200/70 text-xs">
+                <span class="text-slate-500 font-semibold px-2 flex items-center gap-1">
+                    <i data-lucide="layers" class="w-3.5 h-3.5 text-indigo-500"></i> Nicho Demo:
+                </span>
+                <select id="nichePresetSelect" class="bg-white border-0 text-slate-800 font-bold rounded-lg px-2.5 py-1 text-xs focus:ring-2 focus:ring-indigo-500 cursor-pointer shadow-xs">
+                    <option value="barbearia">✂️ Barbearia Premium</option>
+                    <option value="salao">💇‍♀️ Salão de Beleza & Studio</option>
+                    <option value="estetica">✨ Clínica de Estética</option>
+                    <option value="odontologia">🦷 Consultório Odontológico</option>
+                    <option value="fisioterapia">🏃 Fisioterapia & Pilates</option>
+                </select>
+            </div>
+
+            <!-- Alternador de Modos: Cliente vs Administrador -->
+            <div class="flex items-center gap-2">
+                <div class="bg-slate-100 p-1 rounded-xl border border-slate-200 flex items-center">
+                    <button type="button" id="btnViewClient"
+                        class="flex items-center gap-1.5 px-3 sm:px-4 py-1.5 text-xs sm:text-sm font-semibold rounded-lg bg-indigo-600 text-white shadow-xs transition-all">
+                        <i data-lucide="user" class="w-4 h-4"></i>
+                        <span>Cliente</span>
+                    </button>
+                    <button type="button" id="btnViewAdmin"
+                        class="flex items-center gap-1.5 px-3 sm:px-4 py-1.5 text-xs sm:text-sm font-semibold rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-200/60 transition-all">
+                        <i data-lucide="shield-check" class="w-4 h-4"></i>
+                        <span>Gestão / Admin</span>
+                    </button>
+                </div>
+
+                <!-- Botão de Contato WhatsApp Rápido -->
+                <a id="headerPhoneBadge" href="#" target="_blank"
+                    class="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-emerald-200 bg-emerald-50 text-emerald-800 text-xs font-semibold hover:bg-emerald-100 transition-colors">
+                    <i data-lucide="phone" class="w-3.5 h-3.5 text-emerald-600"></i>
+                    <span>WhatsApp</span>
+                </a>
+
+                <!-- Link para Tabela de Preços & Níveis -->
+                <a href="index.html"
+                    class="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-indigo-200 bg-indigo-50 text-indigo-700 text-xs font-bold hover:bg-indigo-100 transition-colors"
+                    title="Conheça nossos outros sistemas e níveis">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-indigo-600"></i>
+                    <span>Ver Tabela de Preços</span>
+                </a>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- ================================================================== -->
+        <!-- 1. PAINEL DO CLIENTE (EXPERIÊNCIA DE AGENDAMENTO FLUIDA)           -->
+        <!-- ================================================================== -->
+        <section id="clientViewSection" class="space-y-8">
+
+            <!-- Hero Banner do Estabelecimento -->
+            <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-indigo-200 text-xs font-medium backdrop-blur-md mb-3 border border-white/10">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span id="businessOpenHours">Aberto Seg a Sáb: 08:00 às 19:00</span>
+                        </div>
+                        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight dynamic-business-name">
+                            Agendou.io
+                        </h1>
+                        <p class="text-slate-300 text-sm sm:text-base mt-2 max-w-2xl flex items-center gap-1.5">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-indigo-400 shrink-0"></i>
+                            <span id="businessAddress">Av. Paulista, 1200 - São Paulo, SP</span>
+                        </p>
+                    </div>
+
+                    <div class="flex items-center gap-3 bg-white/5 border border-white/10 p-3 rounded-2xl backdrop-blur-md">
+                        <div class="text-right">
+                            <p class="text-xs text-slate-300">Confirmação Direta</p>
+                            <p class="text-sm font-bold text-emerald-400 flex items-center justify-end gap-1">
+                                <i data-lucide="zap" class="w-3.5 h-3.5"></i> Via WhatsApp
+                            </p>
+                        </div>
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                            <i data-lucide="message-square" class="w-5 h-5"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grade de Agendamento: 2 Colunas Principais -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+                <!-- COLUNA ESQUERDA: Passo 1 (Serviços) + Passo 2 (Calendário e Horários) -->
+                <div class="lg:col-span-7 xl:col-span-8 space-y-8">
+
+                    <!-- ETAPA 1: SELEÇÃO DE SERVIÇO -->
+                    <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs">
+                        <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                            <div class="flex items-center gap-3">
+                                <span class="w-7 h-7 rounded-lg bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center">1</span>
+                                <div>
+                                    <h2 class="text-lg font-bold text-slate-900">Selecione o Serviço</h2>
+                                    <p class="text-xs text-slate-500">Escolha o atendimento desejado</p>
+                                </div>
+                            </div>
+                            <span class="text-xs text-indigo-600 font-semibold bg-indigo-50 px-2.5 py-1 rounded-full">
+                                Valores transparentes
+                            </span>
+                        </div>
+
+                        <!-- Lista de Cards de Serviços -->
+                        <div id="servicesListContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Injetado dinamicamente via JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- ETAPA 2: DATA & HORÁRIO -->
+                    <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs">
+                        <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-100">
+                            <div class="flex items-center gap-3">
+                                <span class="w-7 h-7 rounded-lg bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center">2</span>
+                                <div>
+                                    <h2 class="text-lg font-bold text-slate-900">Data & Horário</h2>
+                                    <p class="text-xs text-slate-500">Escolha o melhor dia e horário disponível</p>
+                                </div>
+                            </div>
+                            <div id="slotsAvailabilityNotice">
+                                <!-- Status de slots livres -->
+                            </div>
+                        </div>
+
+                        <!-- Mini-Calendário Interativo -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            
+                            <!-- Componente Calendário -->
+                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200/70">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 id="calMonthTitle" class="font-bold text-sm text-slate-900">Outubro 2026</h3>
+                                    <div class="flex items-center gap-1">
+                                        <button type="button" id="calPrevMonth"
+                                            class="p-1.5 rounded-lg bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 transition-colors"
+                                            aria-label="Mês Anterior">
+                                            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                                        </button>
+                                        <button type="button" id="calNextMonth"
+                                            class="p-1.5 rounded-lg bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 transition-colors"
+                                            aria-label="Próximo Mês">
+                                            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Dias da Semana -->
+                                <div class="grid grid-cols-7 gap-1 text-center mb-2">
+                                    <span class="text-[11px] font-bold text-slate-400">Dom</span>
+                                    <span class="text-[11px] font-bold text-slate-600">Seg</span>
+                                    <span class="text-[11px] font-bold text-slate-600">Ter</span>
+                                    <span class="text-[11px] font-bold text-slate-600">Qua</span>
+                                    <span class="text-[11px] font-bold text-slate-600">Qui</span>
+                                    <span class="text-[11px] font-bold text-slate-600">Sex</span>
+                                    <span class="text-[11px] font-bold text-slate-600">Sáb</span>
+                                </div>
+
+                                <!-- Grid de Dias do Mês -->
+                                <div id="calendarDaysGrid" class="grid grid-cols-7 gap-1">
+                                    <!-- Injetado dinamicamente -->
+                                </div>
+                            </div>
+
+                            <!-- Horários Disponíveis para a Data Selecionada -->
+                            <div class="flex flex-col">
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                                        <i data-lucide="clock" class="w-3.5 h-3.5 text-indigo-600"></i> Horários em:
+                                    </span>
+                                    <span id="selectedDateSlotBadge" class="text-xs font-extrabold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-md">
+                                        --/--/----
+                                    </span>
+                                </div>
+
+                                <div class="flex-1 overflow-y-auto max-h-[280px] pr-1">
+                                    <div id="timeSlotsContainer" class="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                                        <!-- Injetado dinamicamente -->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- COLUNA DIREITA: Passo 3 (Formulário do Cliente + Resumo Fixo) -->
+                <div class="lg:col-span-5 xl:col-span-4 space-y-6 lg:sticky lg:top-24">
+
+                    <!-- Resumo & Formulário de Confirmação -->
+                    <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-lg">
+                        
+                        <!-- Cabeçalho do Card -->
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-5">
+                            <div class="flex items-center gap-2">
+                                <span class="w-7 h-7 rounded-lg bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center">3</span>
+                                <h3 class="font-bold text-slate-900 text-base">Seus Dados & Resumo</h3>
+                            </div>
+                            <span class="text-xs text-emerald-600 font-semibold bg-emerald-50 px-2.5 py-1 rounded-full flex items-center gap-1">
+                                <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> 100% Seguro
+                            </span>
+                        </div>
+
+                        <!-- Resumo do Item Selecionado -->
+                        <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200/70 mb-5 space-y-2.5 text-xs">
+                            <div class="flex items-center justify-between">
+                                <span class="text-slate-500 font-medium">Serviço:</span>
+                                <span id="summaryServiceName" class="font-bold text-slate-800 text-right">Carregando...</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-slate-500 font-medium">Data:</span>
+                                <span id="summaryDate" class="font-bold text-slate-800">Selecione no calendário</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-slate-500 font-medium">Horário:</span>
+                                <span id="summaryTime" class="font-bold text-slate-800">Selecione um slot</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-slate-500 font-medium">Duração Estimada:</span>
+                                <span id="summaryServiceDuration" class="font-bold text-slate-700">-- min</span>
+                            </div>
+                            <div class="pt-2 border-t border-slate-200/80 flex items-center justify-between text-sm">
+                                <span class="font-bold text-slate-900">Total a Pagar:</span>
+                                <span id="summaryTotalPrice" class="font-extrabold text-indigo-700 text-base">R$ 0,00</span>
+                            </div>
+                        </div>
+
+                        <!-- Formulário de Identificação do Cliente -->
+                        <form id="bookingForm" class="space-y-4">
+                            <div>
+                                <label for="clientName" class="block text-xs font-bold text-slate-700 mb-1.5">
+                                    Nome Completo <span class="text-rose-500">*</span>
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                                        <i data-lucide="user" class="w-4 h-4"></i>
+                                    </div>
+                                    <input type="text" id="clientName" required placeholder="Ex: Lucas Silva"
+                                        class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="clientPhone" class="block text-xs font-bold text-slate-700 mb-1.5">
+                                    WhatsApp <span class="text-rose-500">*</span>
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                                        <i data-lucide="phone" class="w-4 h-4"></i>
+                                    </div>
+                                    <input type="tel" id="clientPhone" required placeholder="(11) 99999-9999" maxlength="15"
+                                        class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="clientEmail" class="block text-xs font-bold text-slate-700 mb-1.5">
+                                    E-mail (Opcional para recibo)
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                                        <i data-lucide="mail" class="w-4 h-4"></i>
+                                    </div>
+                                    <input type="email" id="clientEmail" placeholder="seuemail@exemplo.com"
+                                        class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="clientNotes" class="block text-xs font-bold text-slate-700 mb-1.5">
+                                    Observações ou Preferências (Opcional)
+                                </label>
+                                <textarea id="clientNotes" rows="2" placeholder="Ex: primeira vez no local, restrições..."
+                                    class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none"></textarea>
+                            </div>
+
+                            <!-- Botão de Finalização -->
+                            <button type="submit" id="btnSubmitBooking"
+                                class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-extrabold text-sm shadow-md shadow-indigo-500/25 transition-all flex items-center justify-center gap-2 group">
+                                <span>Confirmar Agendamento</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+
+                            <button type="button" id="btnResetBooking" class="w-full text-center text-xs text-slate-400 hover:text-slate-600 py-1 transition-colors">
+                                Limpar formulário
+                            </button>
+                        </form>
+
+                        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-center gap-2 text-slate-400 text-[11px]">
+                            <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+                            <span>Sem taxas ocultas • Pagamento direto no local</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- 2. PAINEL DO ADMINISTRADOR (GESTÃO COMPLETA DO ESTABELECIMENTO)   -->
+        <!-- ================================================================== -->
+        <section id="adminViewSection" class="hidden space-y-6">
+
+            <!-- Header do Painel de Controle -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-slate-200 shadow-xs">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-indigo-50 text-indigo-700 border border-indigo-200">
+                            Painel do Estabelecimento
+                        </span>
+                        <span class="text-xs text-slate-400 font-medium">Controle de Horários & Clientes</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 mt-1">Gestão de Agendamentos</h2>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <button type="button" id="btnOpenSettings"
+                        class="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 text-xs font-bold hover:bg-slate-50 transition-all shadow-xs">
+                        <i data-lucide="settings" class="w-4 h-4 text-slate-500"></i>
+                        <span>Configurar Horários & Serviços</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- KPIs e Indicadores em Tempo Real -->
+            <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
+                
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-500">Total Geral</span>
+                        <div class="w-7 h-7 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center">
+                            <i data-lucide="calendar" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                    <p id="kpiTotalApts" class="text-2xl font-extrabold text-slate-900 mt-2">0</p>
+                    <span class="text-[11px] text-slate-400">cadastrados no sistema</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-emerald-600">Confirmados</span>
+                        <div class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                            <i data-lucide="check-circle" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                    <p id="kpiConfirmedApts" class="text-2xl font-extrabold text-emerald-600 mt-2">0</p>
+                    <span class="text-[11px] text-slate-400">horários garantidos</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-amber-600">Pendentes</span>
+                        <div class="w-7 h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
+                            <i data-lucide="clock" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                    <p id="kpiPendingApts" class="text-2xl font-extrabold text-amber-600 mt-2">0</p>
+                    <span class="text-[11px] text-slate-400">aguardando confirmação</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-indigo-600">Atendimentos Hoje</span>
+                        <div class="w-7 h-7 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center">
+                            <i data-lucide="calendar-days" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                    <p id="kpiTodayApts" class="text-2xl font-extrabold text-indigo-600 mt-2">0</p>
+                    <span class="text-[11px] text-slate-400">programados para hoje</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs col-span-2 lg:col-span-1">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-700">Faturamento Previsto</span>
+                        <div class="w-7 h-7 rounded-lg bg-violet-50 text-violet-600 flex items-center justify-center">
+                            <i data-lucide="trending-up" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                    <p id="kpiEstimatedRevenue" class="text-xl font-black text-slate-900 mt-2">R$ 0,00</p>
+                    <span class="text-[11px] text-emerald-600 font-semibold">Confirmados & Concluídos</span>
+                </div>
+
+            </div>
+
+            <!-- Barra de Filtros e Busca Rápida -->
+            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+                
+                <!-- Abas de Filtro de Status -->
+                <div class="flex items-center gap-1 overflow-x-auto pb-1 md:pb-0">
+                    <button type="button" data-status-filter="all"
+                        class="px-3 py-1.5 text-xs font-bold rounded-lg bg-indigo-600 text-white shadow-xs transition-colors shrink-0">
+                        Todos
+                    </button>
+                    <button type="button" data-status-filter="pendente"
+                        class="px-3 py-1.5 text-xs font-bold rounded-lg text-slate-600 hover:bg-slate-100 transition-colors shrink-0">
+                        Pendentes
+                    </button>
+                    <button type="button" data-status-filter="confirmado"
+                        class="px-3 py-1.5 text-xs font-bold rounded-lg text-slate-600 hover:bg-slate-100 transition-colors shrink-0">
+                        Confirmados
+                    </button>
+                    <button type="button" data-status-filter="concluido"
+                        class="px-3 py-1.5 text-xs font-bold rounded-lg text-slate-600 hover:bg-slate-100 transition-colors shrink-0">
+                        Concluídos
+                    </button>
+                    <button type="button" data-status-filter="cancelado"
+                        class="px-3 py-1.5 text-xs font-bold rounded-lg text-slate-600 hover:bg-slate-100 transition-colors shrink-0">
+                        Cancelados
+                    </button>
+                </div>
+
+                <!-- Busca e Filtro de Período -->
+                <div class="flex items-center gap-2">
+                    <div class="relative flex-1 md:w-60">
+                        <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-slate-400">
+                            <i data-lucide="search" class="w-3.5 h-3.5"></i>
+                        </div>
+                        <input type="text" id="adminSearchInput" placeholder="Buscar cliente ou cód..."
+                            class="w-full pl-8 pr-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:bg-white focus:ring-2 focus:ring-indigo-500">
+                    </div>
+
+                    <select id="adminDateFilter" class="bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-indigo-500">
+                        <option value="all">Todas as Datas</option>
+                        <option value="today">Apenas Hoje</option>
+                        <option value="tomorrow">Amanhã</option>
+                        <option value="week">Próximos 7 Dias</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- Tabela de Agendamentos -->
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-xs overflow-hidden">
+                <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+                    <h3 class="font-bold text-slate-900 text-sm">Lista de Atendimentos</h3>
+                    <span id="adminFilteredCountBadge" class="text-xs text-slate-500 font-semibold bg-slate-100 px-2.5 py-1 rounded-full">
+                        0 registros
+                    </span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-100 text-slate-500 font-bold uppercase tracking-wider text-[11px]">
+                                <th class="py-3 px-4">Cliente & ID</th>
+                                <th class="py-3 px-4">Serviço & Preço</th>
+                                <th class="py-3 px-4">Data & Horário</th>
+                                <th class="py-3 px-4">Status</th>
+                                <th class="py-3 px-4">Observações</th>
+                                <th class="py-3 px-4 text-right">Ações Rápidas</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminAppointmentsTableBody">
+                            <!-- Injetado dinamicamente via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p>© 2026 Agendou.io - Sistema Micro-SaaS para Barbearias, Salões & Clínicas.</p>
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-indigo-600 hover:text-indigo-800 font-bold hover:underline flex items-center gap-1">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Conhecer Todos os Planos & Soluções NexusStudio</span>
+                </a>
+                <span class="text-slate-300 hidden sm:inline">|</span>
+                <p class="flex items-center gap-1 font-semibold text-slate-500">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Pronto para GitHub Pages
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ====================================================================== -->
+    <!-- 3. MODAIS DO SISTEMA                                                   -->
+    <!-- ====================================================================== -->
+
+    <!-- MODAL 1: TICKET DIGITAL & AUTOMAÇÃO WHATSAPP -->
+    <div id="ticketModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-slate-200 overflow-hidden relative toast-enter" id="ticketModalContent">
+            
+            <!-- Topo do Voucher / Ticket -->
+            <div class="bg-gradient-to-r from-indigo-600 to-violet-600 p-6 text-white text-center relative">
+                <button type="button" id="btnCloseTicketModal" class="absolute top-4 right-4 text-white/70 hover:text-white p-1 rounded-lg">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+                <div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center mx-auto mb-3 shadow-sm">
+                    <i data-lucide="check-check" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-xl font-black">Agendamento Realizado!</h3>
+                <p class="text-indigo-100 text-xs mt-1">Envie os detalhes agora no WhatsApp para confirmação</p>
+                <div class="inline-block mt-3 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-mono font-bold" id="ticketCode">
+                    #AGD-0000
+                </div>
+            </div>
+
+            <!-- Corpo do Voucher com Recortes de Bilhete -->
+            <div class="p-6 space-y-4 text-xs ticket-edge-left ticket-edge-right">
+                
+                <div class="grid grid-cols-2 gap-3 pb-3 border-b border-dashed border-slate-200">
+                    <div>
+                        <span class="text-slate-400 block">Cliente</span>
+                        <span class="font-bold text-slate-800 text-sm" id="ticketClientName">Nome do Cliente</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-400 block">WhatsApp</span>
+                        <span class="font-bold text-slate-800" id="ticketClientPhone">(11) 99999-9999</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 pb-3 border-b border-dashed border-slate-200">
+                    <div>
+                        <span class="text-slate-400 block">Serviço</span>
+                        <span class="font-bold text-slate-800 text-sm" id="ticketServiceName">Corte & Barba</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-400 block">Valor</span>
+                        <span class="font-extrabold text-indigo-700 text-sm" id="ticketPrice">R$ 0,00</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 pb-3 border-b border-slate-200">
+                    <div>
+                        <span class="text-slate-400 block">Data Marcada</span>
+                        <span class="font-bold text-slate-800" id="ticketDate">24/10/2026</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-400 block">Horário & Duração</span>
+                        <span class="font-bold text-slate-800" id="ticketTime">14:00h</span>
+                        <span class="text-[10px] text-slate-400 block" id="ticketDuration">45 min</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/60">
+                    <span class="text-slate-400 block text-[10px]">Local de Atendimento:</span>
+                    <span class="font-bold text-slate-800" id="ticketBusinessName">Nome da Empresa</span>
+                    <p class="text-slate-500 text-[11px] mt-0.5" id="ticketAddress">Endereço Completo</p>
+                </div>
+
+                <!-- Botão de Ação WhatsApp de Alta Conversão -->
+                <div class="space-y-2 pt-2">
+                    <a id="btnWhatsAppTicket" href="#" target="_blank"
+                        class="w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30 transition-all">
+                        <i data-lucide="message-circle" class="w-5 h-5"></i>
+                        <span>Confirmar no WhatsApp Agora</span>
+                    </a>
+
+                    <div class="flex items-center gap-2">
+                        <a id="btnGoogleCalTicket" href="#" target="_blank"
+                            class="flex-1 py-2 px-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 text-center font-bold text-[11px] transition-colors flex items-center justify-center gap-1.5">
+                            <i data-lucide="calendar-plus" class="w-3.5 h-3.5 text-indigo-600"></i>
+                            <span>Google Agenda</span>
+                        </a>
+
+                        <button type="button" onclick="window.print()"
+                            class="py-2 px-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-[11px] transition-colors flex items-center gap-1.5">
+                            <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+                            <span>Imprimir</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MODAL 2: CONFIGURAÇÕES DO ESTABELECIMENTO -->
+    <div id="settingsModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm hidden">
+        <div class="bg-white rounded-3xl max-w-xl w-full shadow-2xl border border-slate-200 overflow-hidden max-h-[90vh] flex flex-col">
+            
+            <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="sliders" class="w-5 h-5 text-indigo-600"></i>
+                    <h3 class="font-extrabold text-slate-900 text-base">Configurações do Estabelecimento</h3>
+                </div>
+                <button type="button" id="btnCloseSettings" class="text-slate-400 hover:text-slate-600 p-1">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="p-6 overflow-y-auto space-y-6 flex-1 text-xs">
+                
+                <form id="formSettings" class="space-y-4">
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">Nome do Estabelecimento</label>
+                            <input type="text" id="cfgBusinessName" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">WhatsApp de Contato (DDD + Número)</label>
+                            <input type="text" id="cfgPhone" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Slogan / Subtítulo</label>
+                        <input type="text" id="cfgSubtitle" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-indigo-500">
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Endereço Completo</label>
+                        <input type="text" id="cfgAddress" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-indigo-500">
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-100">
+                        <h4 class="font-bold text-slate-900 mb-3 flex items-center gap-1.5">
+                            <i data-lucide="clock" class="w-4 h-4 text-indigo-500"></i> Horários de Funcionamento
+                        </h4>
+                        
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            <div>
+                                <label class="block font-semibold text-slate-600 mb-1">Abertura</label>
+                                <input type="time" id="cfgStartHour" required class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl text-xs">
+                            </div>
+                            <div>
+                                <label class="block font-semibold text-slate-600 mb-1">Fechamento</label>
+                                <input type="time" id="cfgEndHour" required class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl text-xs">
+                            </div>
+                            <div>
+                                <label class="block font-semibold text-slate-600 mb-1">Duração Slot (min)</label>
+                                <input type="number" id="cfgSlotDuration" min="15" max="120" step="5" required class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl text-xs">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3 mt-3">
+                            <div>
+                                <label class="block font-semibold text-slate-600 mb-1">Início Almoço / Pausa</label>
+                                <input type="time" id="cfgLunchStart" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl text-xs">
+                            </div>
+                            <div>
+                                <label class="block font-semibold text-slate-600 mb-1">Fim Almoço / Pausa</label>
+                                <input type="time" id="cfgLunchEnd" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl text-xs">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gerenciamento de Serviços Cadastrados -->
+                    <div class="pt-3 border-t border-slate-100">
+                        <h4 class="font-bold text-slate-900 mb-2 flex items-center justify-between">
+                            <span>Serviços Ativos</span>
+                        </h4>
+
+                        <div id="cfgServicesContainer" class="space-y-2 max-h-40 overflow-y-auto mb-3">
+                            <!-- Injetado dinamicamente -->
+                        </div>
+
+                        <!-- Adicionar Novo Serviço -->
+                        <div class="p-3 bg-indigo-50/50 border border-indigo-100 rounded-2xl space-y-2">
+                            <span class="font-bold text-indigo-900 block text-[11px]">+ Adicionar Novo Serviço</span>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                                <input type="text" id="cfgNewServiceName" placeholder="Nome do Serviço" class="p-2 bg-white border border-slate-200 rounded-lg text-xs">
+                                <input type="number" id="cfgNewServicePrice" placeholder="Preço (R$)" step="0.5" class="p-2 bg-white border border-slate-200 rounded-lg text-xs">
+                                <input type="number" id="cfgNewServiceDuration" placeholder="Minutos (ex: 45)" class="p-2 bg-white border border-slate-200 rounded-lg text-xs">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-200 flex items-center justify-between">
+                        <button type="button" id="btnResetDemoData" class="text-rose-600 hover:text-rose-800 font-bold text-xs underline">
+                            Restaurar Dados de Exemplo
+                        </button>
+
+                        <button type="submit" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold shadow-md shadow-indigo-500/20">
+                            Salvar Configurações
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MODAL 3: REMARCAR AGENDAMENTO -->
+    <div id="rescheduleModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-slate-200 p-6 space-y-4">
+            
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="calendar-sync" class="w-5 h-5 text-amber-500"></i>
+                    <h3 class="font-bold text-slate-900 text-base">Remarcar Horário</h3>
+                </div>
+                <button type="button" id="btnCloseReschedule" class="text-slate-400 hover:text-slate-600 p-1">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="bg-amber-50 p-3 rounded-2xl border border-amber-200/80 text-xs text-amber-900">
+                <p class="font-bold" id="rescheduleClientInfo">Cliente (#ID) - Serviço</p>
+                <p class="mt-0.5 text-amber-700" id="rescheduleCurrentSlot">Atual: --/--/---- às --:--</p>
+            </div>
+
+            <form id="formReschedule" class="space-y-4 text-xs">
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1">Nova Data</label>
+                    <input type="date" id="rescheduleDate" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-indigo-500">
+                </div>
+
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1">Novo Horário Disponível</label>
+                    <select id="rescheduleTimeSelect" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-indigo-500">
+                        <!-- Popula slots disponíveis -->
+                    </select>
+                </div>
+
+                <div class="pt-2 flex items-center justify-end gap-2">
+                    <button type="submit" class="w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold transition-all shadow-md shadow-amber-500/20">
+                        Confirmar Remarcação
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- CONTAINER FLUTUANTE DE TOASTS / NOTIFICAÇÕES -->
+    <div id="toastContainer" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 max-w-sm pointer-events-none">
+        <!-- Injetado dinamicamente -->
+    </div>
+
+    <!-- SCRIPTS MODULARES -->
+    <script src="js/store.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
